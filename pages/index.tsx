@@ -1,10 +1,10 @@
 
-import Layout from './components/Layout'
-import Card from './components/Card'
+import Layout from '../components/Layout'
+import Card from '../components/Card'
 import { useRouter } from 'next/router'
-import React, { ChangeEvent, FormEvent, Suspense, useState, useEffect } from 'react'
+import React, { ChangeEvent, useState, useEffect } from 'react'
 import { Playfair_Display } from 'next/font/google'
-import Loading from './components/loading'
+import Loading from '../components/loading'
 
 const playfair = Playfair_Display({
   weight:'400', 
@@ -46,11 +46,13 @@ export default function Home(props:any) {
 
 
 
-  const handleQuery = (e:ChangeEvent<HTMLInputElement>) =>{
+  // const handleQuery = (e:ChangeEvent<HTMLInputElement>) =>{
+  //   setQuery(e.target.value)
+  // }
+
+
+  const handleQuery = async (e:ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value)
-  }
-  const handleSubmit = async (e:FormEvent) => {
-    e.preventDefault()
     const q = query.toLocaleLowerCase()
     const filteredResults = dataChapters.filter(
       (result:any) =>
@@ -60,13 +62,21 @@ export default function Home(props:any) {
     setSearchResult(filteredResults)
     setISOn(true)
   }
+  const alert = () =>{
+    if(query.length === 0 || query.length > 3 ){
+      return 'none'
+    }else if(query.length <= 3){
+      return 'block'
+    }
+  }
+
 
   return (
     <Layout >
       <section className='w-full h-24 mt-10 flex items-center justify-center'>
-        <form action="search surah" onSubmit={handleSubmit}>
-          <input type="text" minLength={4} className='w-72 h-16 border-2 border-green-300 outline-green-500 p-5 invalid:outline-red-500' placeholder='Ketik nama surah...' onChange={handleQuery}/>
-          <button type='submit' className='w-24 h-16 bg-green-500 text-white hover:bg-green-300 disabled:opacity-60' disabled={query.length < 4}>Search</button>
+        <form action="search surah">
+          <input type="text" minLength={4} className='w-72 md:w-96 h-16 border-2 border-green-300 outline-green-500 p-5 invalid:outline-red-500' placeholder='Ketik nama surah...' onChange={handleQuery}/>
+          <p className='text-[12px] text-red-500 pl-2' style={{display:alert()}}>minimal 4 karakter!</p>
         </form>
       </section>
       {loading && <Loading/>}

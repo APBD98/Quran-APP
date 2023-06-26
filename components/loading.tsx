@@ -1,11 +1,11 @@
 import Image from "next/image"
-import loaderImage from '../../public/loader.png'
+import loaderImage from '../public/loader.png'
 
 
 export default function Loading() {
     // You can add any UI inside Loading, including a Skeleton.
     return (
-      <div className='w-full fixed bg-white h-screen top-0 flex items-center justify-center gap-5'>
+      <div className='w-full fixed bg-white left-0 h-full top-0 flex items-center justify-center gap-5'>
               <h1 className='text-green-700 text-xl animate-pulse'>Sedang memuat...</h1>
               <Image
               src={loaderImage}
