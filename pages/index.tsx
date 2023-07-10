@@ -105,7 +105,7 @@ export default function Home(props:any) {
           ))
         }
       </div>
-        <section className='w-full min-[500px] mt-10 grid grid-cols-1 lg:grid-cols-3 gap-3 relative'>       
+        <section className='w-full min-[500px] mt-10 grid grid-cols-1 lg:grid-cols-3 gap-3 relative pb-10'>       
           {
             dataChapters.map((chapter:any) => {
               return (
